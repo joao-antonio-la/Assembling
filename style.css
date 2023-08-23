@@ -1,0 +1,117 @@
+body{
+    font-family: "Consolas";
+    margin: 0;
+    padding: 0;
+    background-color: #808080;
+    display: grid;
+    grid-template-columns: 30vw 40vw 30vw;
+    grid-template-rows: 10vh 20vh 40vh 30vh;
+    justify-content: center;
+    align-items: center;
+    overflow-x: hidden;
+    cursor: default;
+}
+
+.clickable{
+    cursor: pointer;
+}
+
+#top{
+    grid-column: 1 / span 3;
+    grid-row: 1;
+    width: 100%;
+    text-align: center;
+    font-size: 3em;
+    font-weight: bold;
+    background-color: #34b434;
+    height: 100%;
+}
+
+#clickingArea{
+    grid-column: 2;
+    grid-row: 2 / span 2;
+    height: 100%;
+    width: 100%;
+    background-color: #4f5154;
+    display:grid;
+    justify-content: center;
+    align-items: center;
+}
+
+#scoreCount{
+    background-color: #4aa885;
+    text-align: center;
+}
+
+#clickArea{
+    position: relative;
+    top: -50px;
+    height: 100px;
+    width: 100px;
+    background-color: #4d7496;
+    transition: 0.1s ease;
+}
+
+#clickArea:hover{
+    transform: scale(1.2);
+}
+
+#clickArea:active{
+    transform: scale(1.1)
+}
+
+#upgradeShop{
+    grid-column: 2;
+    grid-row: 4;
+    text-align: left;
+    height: 100%;
+    width: 100%;
+    background-color: #3f4043;
+    display: flex;
+    align-items: center;
+    overflow-x: scroll;
+}
+
+.upgradeShopItem{
+    text-align: center;
+    background-color: #4aa885;
+    width: 200px;
+    margin-inline: 10px;
+    min-width: 150px;
+}
+
+#idleShop{
+    grid-column: 1;
+    grid-row: 3 / span 2;
+    background-color: #4f5154;
+    height: 100%;
+    display: grid;
+    justify-items: center;
+    overflow-y: scroll;
+}
+
+#idleTitle{
+    text-align: center;
+    background-color: #4aa885;
+    height: fit-content;
+    width: 50%;
+    margin-top: 2%;
+}
+
+.idleShopItem{
+    font-size: large;
+    background-color: #4aa885;
+    height: fit-content;
+    min-height: 10%;
+    max-height: max-content;
+    width: 90%;
+    margin: 20px;
+}
+
+.idleName{
+    text-align: center;
+}
+
+.idleDescription{
+    font-size: medium;
+}

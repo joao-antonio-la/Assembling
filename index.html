@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title> Game </title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <div id="top"> Assembling </div>
+    <body>
+        <div id="clickingArea">
+            <div id="scoreCount"> Score: 0</div>
+            <div class="clickable" id="clickArea"> </div>
+        </div>
+        <div id="upgradeShop">
+            <div class="upgradeShopItem" id="multiplier">
+                <span>Cost:<span id="multiplierCost"> 15 </span></span>
+                <span>Multiplier:<span id="multiplierAmount"> 1 </span></span><br>
+                <span class="purchasable clickable" id="multiplierBuy">&#10010;</span>
+            </div>
+            <div class="upgradeShopItem" id="minigamesMultiplier">
+                <span>Cost:<span id="minigamesMultiplierCost"> 250 </span></span>
+                <span>Multiplier:<span id="minigamesMultiplierAmount"> 1 </span></span><br>
+                <span class="purchasable clickable" id="minigamesMultiplierBuy">&#10010;</span>
+            </div>
+            <div class="upgradeShopItem"> Content: </div>
+            <div class="upgradeShopItem"> Content: </div>
+            <div class="upgradeShopItem"> Content: </div>
+            <div class="upgradeShopItem"> Content: </div>
+        </div>
+        <div id="idleShop">
+            <div id="idleTitle"> Idles: </div>
+
+            <div class="idleShopItem" id="idle1">
+                <div class="idleName">
+                    Name: Trainee
+                    <span id="idle1Amount"> 0 </span>
+                    Cost: <span id="idle1Cost"> 250 </span>
+                    <span class="purchasable clickable" id="idle1Buy">&#10010;</span>
+                </div>
+                <details class="idleDescription">
+                    <summary class="idleDescriptionClick"> Description </summary>
+                    Text text text text text text text text text
+                    Coding: 1/s 
+                </details>
+            </div>
+            <div class="idleShopItem">
+                <div class="idleName">
+                    Name: Senior
+                    <span id="idle2Amount"></span>
+                    Cost: <span id="idle2Cost"> 0 </span>
+                    <span class="clickable" id="idle2Buy">&#10010;</span>
+                </div>
+                <details class="idleDescription">
+                    <summary class="idleDescriptionClick"> Description </summary>
+                    Text text text text text text text text text
+                    Coding: 5/s 
+                </details>
+            </div>
+
+        </div>
+        
+        <script src="script.js"></script>
+    </body>
+    </html>

@@ -1,183 +1,138 @@
-//------------------------------------//
-//           ABOUT THE CODE           //
-//------------------------------------//
+// CONSTANTS THAT REPRESENT HTML ELEMENTS
+const clickArea = document.getElementById("click-area");
+const scoreCount = document.getElementById("score-count");
 
-/*
-  The whole code of this web game was developed by João Antônio Lopes Araújo.
-  Git-hub profile: https://github.com/joao-antonio-la
-  In the following code, was used cammelCase for convention of variables and function names.
-*/
+const idleButtons = document.querySelectorAll(".idle-buy");
+const buffsButtons = document.querySelectorAll(".buff-buy");
 
 
-//------------------------------------//
-//          GLOBAL VARIABLES          //
-//------------------------------------//
-
-//Variables used to keep track of the score://
-
+//VARIABLES THAT REPRESENT GAME ASPECTS AND THEIR VALUES
 let score = 0;
-let scoreCount = document.getElementById("scoreCount");
+let multiplier = 1;
 
-//Variables used to keep track of item costs, quantities and values.//
-
-//Simple Items: items that have unique aspects.//
-//"Name": [Cost, Amount]//
-let simpleItems = {
-  multiplier: [15, 1],
-  minigamesMultiplier: [250, 0]
+let idleIncomes = {
+    idle1: {
+        price: 250,
+        income: 1, 
+        amount: 0
+    },
+    idle2: {
+        price: 1500,
+        income: 15,
+        amount: 0
+    },
+    idle3: {
+        price: 0,
+        income: 0,
+        amount: 0
+    },
+    idle4: {
+        price: 0,
+        income: 0,
+        amount: 0
+    }
 }
 
-//Idle Items: items that generate idle score.//
-//"Name": [Cost, Amount, Score/s]//
-let idleItems = {
-  idle1: [250, 0, 1],
-  idle2: [1500, 0, 15]
+let buffs = {
+    buff1: {
+        price: 15,
+        action: function(){
+            multiplier += 2;
+        }
+    },
+    buff2: {
+        price: 0,
+        action: function(){
+            
+        }
+    },
+    buff3: {
+        price: 0,
+        action: function(){
+            
+        }
+    },
+    buff4: {
+        price: 0,
+        action: function(){
+            
+        }
+    }
 }
 
 
-//------------------------------------//
-//         MAIN EVENT LISTENER        //
-//------------------------------------//
+//FUNCTIONS THAT UPDATE THE HTML ELEMENTS
+function idleStatsUpdate(element){
+    document.getElementById(element + "-cost").innerHTML = idleIncomes[element]['price'];
+    document.getElementById(element + "-amount").innerHTML = idleIncomes[element]['amount'];
+    document.getElementById(element + "-production").innerHTML = idleIncomes[element]['income'];
+    document.getElementById(element + "-total-profit").innerHTML = idleIncomes[element]['income'] * idleIncomes[element]['amount'];
+}
 
-//This event listener keeps track of every click and identifies what item was clicked.//
+function buffStatsUpdate(element){
+    document.getElementById(element + "-cost").innerHTML = buffs[element]['price'];
+}
 
-document.addEventListener("click", function(event) {
-  var clickedElement = event.target;
-  var elementClass = clickedElement.className.split(" ")[0]; //Gets the first class of an element.//
-  var elementId = clickedElement.id;
-    if(elementClass == "purchasable"){  //Checks if the element is a purchasable item. If it is, the code proceeds for the purchase.//
-      universalBuy(elementId);
-    }
-    if(elementId == "clickArea"){ //Checks if the element is the main click area. If it is, the code updates de score.//
-      score += Object.entries(simpleItems)[0][1][1];
-      scoreCount.innerHTML = "Score: " + score;
-    }
+function updateDisplayScore(){
+    scoreCount.innerHTML = (score);
+}
+
+function updateIdleProfit(){
+    Object.keys(idleIncomes).forEach(function(key){
+        score += idleIncomes[key]['income'] * idleIncomes[key]['amount'];
+    });
+    updateDisplayScore();
+}
+
+//EVENT LISTENERS THAT TRIGGER THE FUNCTIONS
+clickArea.addEventListener("click", function() {
+    score += multiplier;
+    updateDisplayScore();
+    scoreCount.setAttribute("title", score);
 });
 
+idleButtons.forEach(function(element) {
+    element.addEventListener('click', function() {
+        var item = element.value
+        Object.keys(idleIncomes).forEach(function(key){
+            if(item == key){
+                if(score >= idleIncomes[key]['price']){
+                    score -= idleIncomes[key]['price'];
+                    idleIncomes[key]['amount'] += 1;
+                    idleIncomes[key]['price'] = Math.round(idleIncomes[key]['price'] * 1.5);
+                    idleStatsUpdate(item);
+                    updateDisplayScore();
+                }
+            }
+        });
+    });
+});
 
-//------------------------------------//
-//              FUNCTIONS             //
-//------------------------------------//
+buffsButtons.forEach(function(element) {
+    element.addEventListener('click', function() {
+        var item = element.value
+        console.log(item);
+        Object.keys(buffs).forEach(function(key){
+            if(item == key){
+                if(score >= buffs[key]['price']){
+                    score -= buffs[key]['price'];
+                    buffs[key]['action']();
+                    buffs[key]['price'] = Math.round(buffs[key]['price'] * 1.5);
+                    buffStatsUpdate(item);
+                    updateDisplayScore();
+                }
+            }
+        });
+    });
+});
 
-/*
- - Object.entries(itemsList)[index][index][index] -
-It is an extensive line of code dedicated to accessing the dictionary.
-It makes into the exact position of the item's characteristic, allowing modifications.
-More usages of similar lines of code are present in this file.
-*/
+//FUNCTIONS THAT STARTS THE GAME
+Object.keys(idleIncomes).forEach(function(key){
+    idleStatsUpdate(key);
+});
 
-//Function dedicated to verify if the item is in an Idle Item or not.//
-function isIdleItem(id){
-  var isIdle = false;
-  for(var i = 0; i < String(id).length; i++){
-    var char = id[i];
-    if(!isNaN(char)){
-        isIdle = true;
-        break;
-    }
-  }
-  return isIdle;
-}
+Object.keys(buffs).forEach(function(key){
+    buffStatsUpdate(key);
+});
 
-
-//Function dedicated for procedure of buying a Simple Item.//
-function simpleItemsBuy(id){
-  var index = Object.keys(simpleItems).indexOf(id); //Localization of the item in the "simpleItems" dictionary.//
-
-  //Cost modification.//
-  Object.entries(simpleItems)[index][1][0] = Math.round(1.5 * Object.entries(simpleItems)[index][1][0]);
-  var cost = Object.entries(simpleItems)[index][1][0];
-  document.getElementById(id + "Cost").innerHTML = cost;
-
-  //Quantities modification.//
-  var amount = Object.entries(simpleItems)[index][1][1] += 1;
-  document.getElementById(id + "Amount").innerHTML = amount;
-}
-
-
-//Function dedicated for procedure of buying an Idle Item.//
-function idleItemsBuy(id){
-  var index = Object.keys(idleItems).indexOf(id); //Localization of the item in the "idleItems" dictionary.//
-  
-  //Cost modification.//
-  Object.entries(idleItems)[index][1][0] = Math.round(1.5 * Object.entries(idleItems)[index][1][0])
-  var cost = Object.entries(idleItems)[index][1][0];
-  document.getElementById(id + "Cost").innerHTML = cost;
-
-  //Quantities modification.//
-  var amount = Object.entries(idleItems)[index][1][1] += 1;
-  document.getElementById(id + "Amount").innerHTML = amount;
-}
-
-
-//Checks if an item is affordable.//
-function isAffordable(id){
-  var cost = 0;
-  var index = 0;
-  if(isIdleItem(id)){
-    index = Object.keys(idleItems).indexOf(id);
-    cost = Object.entries(idleItems)[index][1][0];
-    if(cost <= score){return true;}
-  }
-  else{
-    index = Object.keys(simpleItems).indexOf(id);
-    cost = Object.entries(simpleItems)[index][1][0];
-    if(cost <= score){return true;}
-  }
-  return false;
-}
-
-
-//Function dedicated to decreasing the score when an item is bought.//
-function decreaseScore(id){
-  var cost = 0;
-  var index = 0;
-  if(isIdleItem(id)){
-    index = Object.keys(idleItems).indexOf(id);
-    cost = Object.entries(idleItems)[index][1][0];
-  }
-  else{
-    index = Object.keys(simpleItems).indexOf(id);
-    cost = Object.entries(simpleItems)[index][1][0];
-  }
-  score -= cost;
-  scoreCount.innerHTML = "Score: " + score;
-}
-
-
-//Function made of a set of functions responsible for buying an item.//
-function universalBuy(id){
-  id = id.replace("Buy", ""); //Formats the id's string so the code accepts it.//
-  if(isAffordable(id)){
-    decreaseScore(id);
-    if(isIdleItem(id)){
-      idleItemsBuy(id);
-    }
-    else{
-      simpleItemsBuy(id);
-    }
-  }
-}
-//The score is decreased before the purchase so it is guaranteed that the cost does not update before.//
-//Otherwise, the cost would go up before the score get subtracted, so it would be charged more than the intended price.//
-
-
-//Function dedicated to calculate the profit made from the Idle Items.//
-function IdleProfit(){
-  var sum = 0;
-  for(var i = 0; i < Object.keys(idleItems).length; i++){
-    sum += Object.entries(idleItems)[i][1][1] * Object.entries(idleItems)[i][1][2];
-  }
-  score += sum;
-}
-
-
-//Function dedicated to updating the score based on the Idle Profit.//
-function updateScoreTotal(){
-  IdleProfit();
-  scoreCount.innerHTML = "Score: " + score;
-}
-
-
-//Function for starting the game time.//
-setInterval(updateScoreTotal, 1000)
+setInterval(updateIdleProfit, 1000);

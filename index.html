@@ -1,64 +1,187 @@
 <!DOCTYPE html>
-<html>
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title> Game </title>
-        <link rel="stylesheet" href="style.css">
-    </head>
-    <div id="top"> Assembling </div>
-    <body>
-        <div id="clickingArea">
-            <div id="scoreCount"> Score: 0</div>
-            <div class="clickable" id="clickArea"> </div>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assembling</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
+<body>
+    <section id="header-section" class="section">
+        <div>
+            <p id="game-title">Assembling</p>
         </div>
-        <div id="upgradeShop">
-            <div class="upgradeShopItem" id="multiplier">
-                <span>Cost:<span id="multiplierCost"> 15 </span></span>
-                <span>Multiplier:<span id="multiplierAmount"> 1 </span></span><br>
-                <span class="purchasable clickable" id="multiplierBuy">&#10010;</span>
-            </div>
-            <div class="upgradeShopItem" id="minigamesMultiplier">
-                <span>Cost:<span id="minigamesMultiplierCost"> 250 </span></span>
-                <span>Multiplier:<span id="minigamesMultiplierAmount"> 1 </span></span><br>
-                <span class="purchasable clickable" id="minigamesMultiplierBuy">&#10010;</span>
-            </div>
-            <div class="upgradeShopItem"> Content: </div>
-            <div class="upgradeShopItem"> Content: </div>
-            <div class="upgradeShopItem"> Content: </div>
-            <div class="upgradeShopItem"> Content: </div>
-        </div>
-        <div id="idleShop">
-            <div id="idleTitle"> Idles: </div>
-
-            <div class="idleShopItem" id="idle1">
-                <div class="idleName">
-                    Name: Trainee
-                    <span id="idle1Amount"> 0 </span>
-                    Cost: <span id="idle1Cost"> 250 </span>
-                    <span class="purchasable clickable" id="idle1Buy">&#10010;</span>
+    </section>
+    <section class="section">
+        <section id="left-sub" class="subsection">
+            <div id="config-div">
+                <p class="div-name">Configurations</p>
+                <div id="config-container">
+                    <div class="config">
+                        configs
+                    </div>
+                    <div class="config">
+                        volume
+                    </div>
+                    <div class="config">
+                        about
+                    </div>
+                    <div class="config">
+                        more
+                    </div>
                 </div>
-                <details class="idleDescription">
-                    <summary class="idleDescriptionClick"> Description </summary>
-                    Text text text text text text text text text
-                    Coding: 1/s 
-                </details>
             </div>
-            <div class="idleShopItem">
-                <div class="idleName">
-                    Name: Senior
-                    <span id="idle2Amount"></span>
-                    Cost: <span id="idle2Cost"> 0 </span>
-                    <span class="clickable" id="idle2Buy">&#10010;</span>
-                </div>
-                <details class="idleDescription">
-                    <summary class="idleDescriptionClick"> Description </summary>
-                    Text text text text text text text text text
-                    Coding: 5/s 
-                </details>
-            </div>
-
-        </div>
+            <div id="idles-div">
+                <p class="div-name">Idles</p>
+                <div id="idles-container">
+                    <div class="idle">
+                        <section class="idle-section stats-section">
+                            <p class="idle-name">Name</p>
+                            <p>
+                                Cost:<span id="idle1-cost">0</span>
+                            </p>
+                            <p>
+                                Production:<span id="idle1-production">0</span>
+                            </p>
+                            <p>
+                                Amount:<span id="idle1-amount">0</span>
+                            </p>
+                            <p>
+                                Total profit:<span id="idle1-total-profit">0</span>
+                            </p>
+                        </section>
+                        <section class="idle-section visual-section">
+                            <div class="idle-icon"></div>
+                            <button value="idle1" class="buy idle-buy">BUY</button>
+                        </section>
+                    </div>
+                    <div class="idle">
+                        <section class="idle-section stats-section">
+                            <p class="idle-name">Name</p>
+                            <p>
+                                Cost:<span id="idle2-cost">0</span>
+                            </p>
+                            <p>
+                                Production:<span id="idle2-production">0</span>
+                            </p>
+                            <p>
+                                Amount:<span id="idle2-amount">0</span>
+                            </p>
+                            <p>
+                                Total profit:<span id="idle2-total-profit">0</span>
+                            </p>
+                        </section>
+                        <section class="idle-section visual-section">
+                            <div class="idle-icon"></div>
+                            <button value="idle2" class="buy idle-buy">BUY</button>
+                        </section>
+                    </div>
+                    <div class="idle">
+                        <section class="idle-section stats-section">
+                            <p class="idle-name">Name</p>
+                            <p>
+                                Cost:<span id="idle3-cost">0</span>
+                            </p>
+                            <p>
+                                Production:<span id="idle3-production">0</span>
+                            </p>
+                            <p>
+                                Amount:<span id="idle3-amount">0</span>
+                            </p>
+                            <p>
+                                Total profit:<span id="idle3-total-profit">0</span>
+                            </p>
+                        </section>
+                        <section class="idle-section visual-section">
+                            <div class="idle-icon"></div>
+                            <button value="idle3" class="buy idle-buy">BUY</button>
+                        </section>
+                    </div>
+                    <div class="idle">
+                        <section class="idle-section stats-section">
+                            <p class="idle-name">Name</p>
+                            <p>
+                                Cost:<span id="idle4-cost">0</span>
+                            </p>
+                            <p>
+                                Production:<span id="idle4-production">0</span>
+                            </p>
+                            <p>
+                                Amount:<span id="idle4-amount">0</span>
+                            </p>
+                            <p>
+                                Total profit:<span id="idle4-total-profit">0</span>
+                            </p>
+                        </section>
+                        <section class="idle-section visual-section">
+                            <div class="idle-icon"></div>
+                            <button value="idle4" class="buy idle-buy">BUY</button>
+                        </section>
+                    </div>
         
-        <script src="script.js"></script>
-    </body>
-    </html>
+                </div>
+            </div>
+        </section>
+        <section id="mid-sub" class="subsection">
+            <div id="main-div">
+                <p class="div-name">Main()</p>
+                <div id="score-display">
+                    <span>Score: </span>
+                    <span id="score-count" title="0">0</span>
+                </div>
+                <div id="click-area"></div>
+            </div>
+            <div id="buffs-div">
+                <p class="div-name">Buffs</p>
+                <div id="buffs-container">
+                    <div class="buff">
+                        <p>Multiplier</p>
+                        <div class="buff-icon"></div>
+                        <span>
+                            Cost:<span id="buff1-cost">0</span>
+                        </span>
+                        <br>
+                        <button value="buff1" class="buy buff-buy">BUY</button>
+                    </div>
+                    <div class="buff">
+                        <p>Name</p>
+                        <div class="buff-icon"></div>
+                        <span>
+                            Cost:<span id="buff2-cost">0</span>
+                        </span>
+                        <br>
+                        <button class="buy buff-buy">BUY</button>
+                    </div>
+                    <div class="buff">
+                        <p>Name</p>
+                        <div class="buff-icon"></div>
+                        <span>
+                            Cost:<span id="buff3-cost">0</span>
+                        </span>
+                        <br>
+                        <button class="buy buff-buy">BUY</button>
+                    </div>
+                    <div class="buff">
+                        <p>Name</p>
+                        <div class="buff-icon"></div>
+                        <span>
+                            Cost:<span id="buff4-cost">0</span>
+                        </span>
+                        <br>
+                        <button class="buy buff-buy">BUY</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section id="right-sub" class="subsection">
+            <div id="minigames-div">
+                <p class="div-name">Minigames</p>
+            </div>    
+        </section>
+    </section>
+    <script src="script.js"></script>
+</body>
+</html>

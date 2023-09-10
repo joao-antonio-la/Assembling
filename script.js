@@ -37,7 +37,7 @@ let buffs = {
     buff1: {
         price: 15,
         action: function(){
-            multiplier += 2;
+            multiplier += 1;
         }
     },
     buff2: {
